@@ -13,28 +13,21 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="style.css">
 
   </head>
 
   <body>
     <!-- Header -->
 
-    <div class="bg-dark">
+    <header class="bg-light">
       <div class="container">
         <div class="row">
-          <nav class="col navbar navbar-expand-md navbar-dark">
+          <nav class="col navbar navbar-expand-md navbar-light">
             <a class="navbar-brand" href="index.html">
               <img src="logo.png" height="80" alt="Info Logo" />
             </a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div id="navbarContent" class="collapse navbar-collapse">
@@ -43,38 +36,25 @@
                   <a class="nav-link" href="index.html">Accueil</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="Panier.html">Panier</a>
+                  <a class="nav-link" href="cart.html">Panier</a>
                 </li>
               </ul>
             </div>
           </nav>
         </div>
       </div>
-    </div>
+    </header>
 
     <!-- Section -->
 
-    <div class="container">
-      <div class="row" id="main">
-
-        <!-- Test affichage a supprimer -->
-        <div class="col-12 col-md-4">
-          <div class="card mx-2 my-4">
-            <img src="logo.png" alt="" class="card-img-top"/>
-            <div class="card-body">
-                <a href="#" class="stretched-link card-title h4">Produit</a>
-                <p class="card-text">Prix : €</p>
-            </div>
-          </div>
-        </div>
-         <!-- Test affichage a supprimer -->    
-
-     
-    </div>
+    <section class="container">
+      <div class="row" id="products"></div>
+    </section>
+    
 
     <!-- Footer -->
 
-    <div class="bg-light mt-5">
+    <footer class="bg-light mt-5">
       <div class="container">
         <div class="row pt-4 pb-3">
           <div class="col">
@@ -90,7 +70,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </footer>
 
     <!-- Optional JavaScript -->
 
