@@ -12,58 +12,68 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
+
+    <link rel="../stylesheet" href="style.css">
+
+    <script src="https://kit.fontawesome.com/f5cef80fb1.js" crossorigin="anonymous" ></script>
+
   </head>
   <body>
+    
     <div class="container">
 
+      <!-- Panier -->
       <h2 class="my-4">Votre panier</h2>
-      
-      <table class="table col-8 mx-auto">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Produit</th>
-            <th scope="col">Prix</th>
-            <th scope="col">Quantité</th>
-            <th scope="col">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-          <th scope="row">1</th>
-          <td>Product1</td>
-          <td>50€</td>
-          <td>2</td>
-          <td>100€</td>
-        </tr>
 
-        <tr>
-          <th scope="row">2</th>
-          <td>Product2</td>
-          <td>75€</td>
-          <td>1</td>
-          <td>75€</td>
-        </tr>
+        <table class="table col-8 mx-auto">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Produit</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody id="cart">
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Product1</td>
+                    <td>50€</td>
+                    <td>2 <span data-id= ${}><i class="fas fa-plus-square"></i> <i class="fas fa-minus-square"></i></span></td>
+                    <td>100€</td>
+                </tr>
 
-        <tr>
-          <th scope="row">3</th>
-          <td>Product3</td>
-          <td>60€</td>
-          <td>3</td>
-          <td>180€</td>
-        </tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <th>Total (TTC) :</th>
-          <td>355€</td>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Product2</td>
+                    <td>75€</td>
+                    <td>1</td>
+                    <td>75€</td>
+                </tr>
 
-        <tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Product3</td>
+                    <td>60€</td>
+                    <td>3</td>
+                    <td>180€</td>
+                </tr>
+            </tbody>
 
-        </tr>
-        
-      </tbody>
-    </table>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th>Total (TTC) :</th>
+                    <td>355€</td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    <!-- Formulaire coordonnés -->
 
     <div class="row">
       <div class="col">
@@ -103,7 +113,7 @@
             <div class="form-check">
               <input class="form-check-input" type="checkbox" id="gridCheck" required>
               <label class="form-check-label" for="gridCheck">
-                Accepter les conditions générales de ventes
+                Accepter les <a href="#" target="_blank">conditions générales de ventes</a>                
               </label>
             </div>
           </div>
