@@ -10,28 +10,23 @@ fetch(`http://localhost:3000/api/teddies/${localStorage.pageProduct}`)
     customisedProduct(product);
     document.querySelector(".btn-to-cart").onclick = () => {
 
-      console.log("hello");
-      const quantity = document.getElementById("Quantity").value;
-// fonction à retirer après implémentation de la fonction de vérification de la présence du produit dans le panier
-      clearCart();
+      const quantity = document.getElementById("Quantity").value;      
       addCart(product, quantity);
-
       document.querySelector(".add-to-cart").style.display = "inherit"
       document.querySelector(".btn-to-cart").style.display = "none";
       document.querySelector("#product-detail").style.opacity = "0.3";
     };
 
+    // Désactive le bouton de validation si la quantité est inférieure à 1
     const quantityInput = document.getElementById("Quantity");
     quantityInput.addEventListener('change', function () {
       const quantity = this.value;
-
       if (quantity < 1) {
-        disableSubmit(false);
+        disableSubmit(true);
       } else {
-        disableSubmit(true)
+        disableSubmit(false)
       }
     });
-
   })
 
   .catch(function (err) {
@@ -74,40 +69,3 @@ function customisedProduct(product) {
   }
 }
 
-// Désactive le bouton en fonction du paramètre reçu
-function disableSubmit(disabled) {
-  if (disabled) {
-    document
-      .querySelector(".submit-btn")
-      .removeAttribute("disabled");
-  } else {
-    document
-      .querySelector(".submit-btn")
-      .setAttribute("disabled", true);
-  }
-}
-
-// Gèrent le panier, ajout et purge
-
-function addCart(product, quantity) {
-  let listCart = getCart();
-  listCart.push({ id: product._id, name: product.name, price: product.price, nb: `${quantity}` });
-  saveCart(listCart);
-}
-
-function clearCart() {
-  localStorage.removeItem("listCart");
-}
-
-function getCart() {
-  let listCart = localStorage.getItem("listCart");
-  if (listCart == null) {
-    return [];
-  } else {
-    return JSON.parse(listCart);
-  }
-}
-
-function saveCart(listCart) {
-  localStorage.setItem("listCart", JSON.stringify(listCart));
-}
