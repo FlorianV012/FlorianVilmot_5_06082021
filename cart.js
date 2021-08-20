@@ -43,9 +43,13 @@ function total(totalCart) {
     localStorage.setItem("OrderAmount", `${totalCart}`);
 }
 
+// Purge le panier et recharge la page
+document.querySelector('#clear-cart').addEventListener('click', ()=>{
+  clearCart();
+  document.location.reload();
+})
 
 const btnSubmit = document.querySelector('.submit-btn');
-
 btnSubmit.addEventListener("click", function () {
   // Vérifie si le formulaire est valide
   var valid = true;
