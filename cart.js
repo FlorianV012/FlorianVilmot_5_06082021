@@ -30,7 +30,7 @@ function createProductLign(lignNb, productName, productPrice, productQuantity) {
     </tr>`;
 }
 
-// Crée la ligne du prix total de la commande
+// Crée la ligne du prix total de la commande et stock celui-ci dans le localStorage
 function total(totalCart) {
   document.getElementById("total-cart").innerHTML += `
     <tr>
@@ -40,4 +40,59 @@ function total(totalCart) {
       <th>Total (TTC) :</th>
       <td>${totalCart}</td>
     </tr>`;
+    localStorage.setItem("OrderAmount", `${totalCart}`);
 }
+
+
+const btnSubmit = document.querySelector('.submit-btn');
+
+btnSubmit.addEventListener("click", function () {
+  // Vérifie si le formulaire est valide
+  var valid = true;
+  for (let input of document.querySelectorAll("form input")) {
+    valid = valid && input.reportValidity();
+    if (!valid) {
+      break;
+    }
+    if (valid) {
+      // Récupère les données du formulaire
+      let inputFirstName = document.querySelector("#firstName");
+      let inputLastName = document.querySelector("#lastName");
+      let inputCity = document.querySelector("#city");
+      let inputAdress = document.querySelector("#address");
+      let inputMail = document.querySelector("#email");
+
+      // Génère le corps de la requête
+      const order = {
+        contact: {
+          firstName: inputFirstName.value,
+          lastName: inputLastName.value,
+          address: inputAdress.value,
+          city: inputCity.value,
+          email: inputMail.value,
+        },
+        products: getCartId(),
+      };
+
+      // Envoie la commande a la partie Back-End, récupère l’identifiant de commande
+      fetch("http://localhost:3000/api/teddies/order", {
+        method: "POST",
+        body: JSON.stringify(order),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          clearCart()
+          localStorage.setItem("orderId", data.orderId);
+
+          // Envoie vers la page de confirmation de la commande
+          document.location.href = "confirmation.html"
+          
+        })
+        .catch(function (err) {
+          console.log(`Erreur : ${err}`);
+        });
+
+    }
+  }
+});
