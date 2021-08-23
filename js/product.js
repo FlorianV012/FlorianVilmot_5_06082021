@@ -9,14 +9,12 @@ fetch(`http://localhost:3000/api/teddies/${localStorage.pageProduct}`)
     createProductPage(product);
     customisedProduct(product);
     document.querySelector(".btn-to-cart").onclick = () => {
-
       const quantity = document.getElementById("Quantity").value;      
       addCart(product, quantity);
       document.querySelector(".add-to-cart").style.display = "inherit"
       document.querySelector(".btn-to-cart").style.display = "none";
       document.querySelector("#product-detail").style.opacity = "0.3";
     };
-
     // Désactive le bouton de validation si la quantité est inférieure à 1
     const quantityInput = document.getElementById("Quantity");
     quantityInput.addEventListener('change', function () {

@@ -5,13 +5,11 @@ fetch("http://localhost:3000/api/teddies")
       return res.json();
     }
   })
-  .then(function (products) {
-    
+  .then(function (products) {    
     //Créer une carte par produit
     for (let i = 0; i < products.length; i++) {
       createCard(products[i].imageUrl, products[i].name, price(products[i].price), products[i]._id);
     };
-
     // recupére l'id du produit au clic et l'envoie dans le localStorage
     const card = document.getElementsByClassName("card");
     for (let i = 0; i < card.length; i++) {
@@ -20,7 +18,6 @@ fetch("http://localhost:3000/api/teddies")
       })
     }
   })
-
   .catch(function (err) {
     // Une erreur est survenue
     console.log(`Erreur : ${err}`);
