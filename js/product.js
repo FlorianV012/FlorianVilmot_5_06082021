@@ -28,7 +28,6 @@ fetch(`http://localhost:3000/api/teddies/${localStorage.pageProduct}`)
       }
     });
   })
-
   .catch(function (err) {
     // Une erreur est survenue
     console.log(`Erreur : ${err}`);
@@ -68,4 +67,3 @@ function customisedProduct(product) {
     ).innerHTML += `<option>${product.colors[i]}</option>`;
   }
 }
-

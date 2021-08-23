@@ -43,7 +43,7 @@ function createCard(productImageUrl, productName, productPrice, productId) {
   </div>`;
 }
 
-// Affichaage d'un message si l'api ne repond pas
+// Affichage d'un message si l'api ne repond pas
 function createNoCard(){
   document.getElementById("products").innerHTML +=
   `<p class="h2 text-center col-12 m-5">Aucun produit à afficher</p>`;

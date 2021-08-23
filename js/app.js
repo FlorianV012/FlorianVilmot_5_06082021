@@ -27,7 +27,7 @@ function addCart(product, quantity) {
   let listCart = getCart();
   let quantityInCart = getCartId().indexOf(product._id);
   if (quantityInCart === -1) {
-    listCart.push({ id: product._id, name: product.name, price: product.price, nb: `${quantity}` });
+    listCart.push({ id: product._id, name: product.name, price: product.price, nb: parseInt(quantity)});
     saveCart(listCart);
   } else {
     listCart[quantityInCart].nb = listCart[quantityInCart].nb += parseInt(quantity);
@@ -37,13 +37,6 @@ function addCart(product, quantity) {
 
 function clearCart() {
   localStorage.removeItem("listCart");
-}
-
-function removeCart(productId) {
-  let listCart = getCart();
-  //Retourne un tableau sans le produit avec l'id en paramètre
-  listCart = listCart.filter(product => product.id != productId);
-  saveCart(listCart);
 }
 
 function getCart() {
@@ -62,5 +55,3 @@ function getCartId() {
 function saveCart(listCart) {
   localStorage.setItem("listCart", JSON.stringify(listCart));
 }
-
-
