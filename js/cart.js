@@ -16,6 +16,7 @@ if (cart == null) {
   };
   // Affiche le prix total de la commande
   total(price(totalCart));
+  validOrder();
 };
 
 // Créé une ligne par produit dans le panier
@@ -40,63 +41,65 @@ function total(totalCart) {
       <th>Total (TTC) :</th>
       <td>${totalCart}</td>
     </tr>`;
-    localStorage.setItem("OrderAmount", `${totalCart}`);
+  localStorage.setItem("OrderAmount", `${totalCart}`);
 }
 
 // Purge le panier et recharge la page
-document.querySelector('#clear-cart').addEventListener('click', ()=>{
-  clearCart();
-  document.location.reload();
-})
+function validOrder() {
+  document.querySelector('#clear-cart').addEventListener('click', () => {
+    clearCart();
+    document.location.reload();
+  })
 
-const btnSubmit = document.querySelector('.submit-btn');
-btnSubmit.addEventListener("click", function () {
-  // Vérifie si le formulaire est valide
-  var valid = true;
-  for (let input of document.querySelectorAll("form input")) {
-    valid = valid && input.reportValidity();
-    if (!valid) {
-      break;
-    }
-    if (valid) {
-      // Récupère les données du formulaire
-      let inputFirstName = document.querySelector("#firstName");
-      let inputLastName = document.querySelector("#lastName");
-      let inputCity = document.querySelector("#city");
-      let inputAdress = document.querySelector("#address");
-      let inputMail = document.querySelector("#email");
+  const btnSubmit = document.querySelector('.submit-btn');
+  btnSubmit.addEventListener("click", function () {
+    // Vérifie si le formulaire est valide
+    var valid = true;
+    for (let input of document.querySelectorAll("form input")) {
+      valid = valid && input.reportValidity();
+      if (!valid) {
+        break;
+      }
+      if (valid) {
+        // Récupère les données du formulaire
+        let inputFirstName = document.querySelector("#firstName");
+        let inputLastName = document.querySelector("#lastName");
+        let inputCity = document.querySelector("#city");
+        let inputAdress = document.querySelector("#address");
+        let inputMail = document.querySelector("#email");
 
-      // Génère le corps de la requête
-      const order = {
-        contact: {
-          firstName: inputFirstName.value,
-          lastName: inputLastName.value,
-          address: inputAdress.value,
-          city: inputCity.value,
-          email: inputMail.value,
-        },
-        products: getCartId(),
-      };
+        // Génère le corps de la requête
+        const order = {
+          contact: {
+            firstName: inputFirstName.value,
+            lastName: inputLastName.value,
+            address: inputAdress.value,
+            city: inputCity.value,
+            email: inputMail.value,
+          },
+          products: getCartId(),
+        };
 
-      // Envoie la commande a la partie Back-End, récupère l’identifiant de commande
-      fetch("http://localhost:3000/api/teddies/order", {
-        method: "POST",
-        body: JSON.stringify(order),
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          clearCart()
-          localStorage.setItem("orderId", data.orderId);
-
-          // Envoie vers la page de confirmation de la commande
-          document.location.href = "confirmation.html"
-          
+        // Envoie la commande a la partie Back-End, récupère l’identifiant de commande
+        fetch("http://localhost:3000/api/teddies/order", {
+          method: "POST",
+          body: JSON.stringify(order),
+          headers: { "Content-Type": "application/json" },
         })
-        .catch(function (err) {
-          console.log(`Erreur : ${err}`);
-        });
-
+          .then((response) => response.json())
+          .then((data) => {
+            clearCart()
+            localStorage.setItem("orderId", data.orderId);
+            // Envoie vers la page de confirmation de la commande
+            document.location.href = "confirmation.html"
+          })
+          .catch(function (err) {
+            console.log(`Erreur : ${err}`);
+            localStorage.setItem("Erreur", `${err}`);
+            window.alert("Il y a eu un problème, veuillez réessayer.");
+            document.location.reload();
+          });
+      }
     }
-  }
-});
+  });
+}
