@@ -2,7 +2,6 @@
 let cart = JSON.parse(localStorage.getItem("listCart"));
 // Vérifie si le panier est vide
 if (cart == null) {
-  console.log('panier vide');
   document.getElementById("cart").innerHTML = `
     <h2 class="my-4">Votre panier est vide</h2>
     <p class="h3">Visitez <a href="index.html">notre boutique</a> pour le remplir</p>`
@@ -52,7 +51,8 @@ function validOrder() {
   })
 
   const btnSubmit = document.querySelector('.submit-btn');
-  btnSubmit.addEventListener("click", function () {
+  btnSubmit.addEventListener("click", function (e) {
+    e.preventDefault();
     // Vérifie si le formulaire est valide
     var valid = true;
     for (let input of document.querySelectorAll("form input")) {
@@ -85,7 +85,10 @@ function validOrder() {
       fetch("http://localhost:3000/api/teddies/order", {
         method: "POST",
         body: JSON.stringify(order),
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        }
       })
         .then((response) => response.json())
         .then((data) => {
@@ -95,11 +98,12 @@ function validOrder() {
           document.location.href = "confirmation.html"
         })
         .catch(function (err) {
-          console.log(`Erreur : ${err}`);
-          localStorage.setItem("Erreur", `${err}`);
-          window.alert("Il y a eu un problème, veuillez réessayer.");
-          document.location.reload();
+          alert("Il y a eu une erreur : " + err)
         });
     }
   });
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  console.log('DOM fully loaded and parsed');
+});
