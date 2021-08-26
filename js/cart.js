@@ -15,6 +15,7 @@ if (cart == null) {
   };
   // Affiche le prix total de la commande
   total(price(totalCart));
+  btnClearCart();
   validOrder();
 };
 
@@ -44,12 +45,14 @@ function total(totalCart) {
 }
 
 // Purge le panier et recharge la page
-function validOrder() {
+function btnClearCart() {
   document.querySelector('#clear-cart').addEventListener('click', () => {
     clearCart();
     document.location.reload();
   })
+}
 
+function validOrder() {
   const btnSubmit = document.querySelector('.submit-btn');
   btnSubmit.addEventListener("click", function (e) {
     e.preventDefault();
@@ -103,7 +106,3 @@ function validOrder() {
     }
   });
 }
-
-document.addEventListener('DOMContentLoaded', (event) => {
-  console.log('DOM fully loaded and parsed');
-});
